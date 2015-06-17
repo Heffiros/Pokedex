@@ -10,17 +10,16 @@ import android.widget.Button;
 import android.widget.ScrollView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
-import org.json.JSONArray;
+
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.concurrent.ExecutionException;
 
 
-public class MainActivity extends ActionBarActivity {
+public class Pokemons extends ActionBarActivity {
 
-    JSONObject rec = null;
-    JSONArray json = null;
+    String Type;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,7 +27,7 @@ public class MainActivity extends ActionBarActivity {
 
         jsonReader jsonReader = new jsonReader();
         try {
-            dataHolder.getInstance().setDonnees(0,jsonReader.execute("http://92.222.9.170/PokedexApi/getAllTypesApi.php").get());
+            dataHolder.getInstance().setDonnees(0,jsonReader.execute("http://92.222.9.170/PokedexApi/getAllPokemonByTypes.php?type="+).get());
             datasReceive();
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -37,14 +36,6 @@ public class MainActivity extends ActionBarActivity {
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
-    }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
     }
 
     public void datasReceive() throws JSONException {
@@ -73,6 +64,14 @@ public class MainActivity extends ActionBarActivity {
         ScrollView sv = new ScrollView(this);
         sv.addView(tableLayout);
         setContentView(sv);
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_pokemons, menu);
+        return true;
     }
 
     @Override
