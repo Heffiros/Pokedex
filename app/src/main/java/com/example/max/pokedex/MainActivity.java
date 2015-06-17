@@ -61,7 +61,6 @@ public class MainActivity extends ActionBarActivity {
                 @Override
                 public void onClick(View view) {
                     Bundle bundle = new Bundle();
-                    bundle.putString("ID_PRODUIT", (String) view.getTag());
                     Intent intent = new Intent(MainActivity.this, Pokemons.class);
                     intent.putExtras(bundle);
                     startActivity(intent);

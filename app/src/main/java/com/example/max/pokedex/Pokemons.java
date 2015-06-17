@@ -25,9 +25,14 @@ public class Pokemons extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Bundle objectbundle = this.getIntent().getExtras();
+        if (objectbundle != null) {
+            Type = objectbundle.getString("Type");
+        }
+
         jsonReader jsonReader = new jsonReader();
         try {
-            dataHolder.getInstance().setDonnees(0,jsonReader.execute("http://92.222.9.170/PokedexApi/getAllPokemonByTypes.php?type="+).get());
+            dataHolder.getInstance().setDonnees(0,jsonReader.execute("http://92.222.9.170/PokedexApi/getAllPokemonByTypes.php?type="+Type).get());
             datasReceive();
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -39,31 +44,6 @@ public class Pokemons extends ActionBarActivity {
     }
 
     public void datasReceive() throws JSONException {
-        json = dataHolder.getInstance().getDonnees(0);
-        TableLayout tableLayout = new TableLayout(this);
-        for (int i = 0; i < json.length(); ++i) {
-            this.rec = json.getJSONObject(i);
-            TableRow tr = new TableRow(this);
-            final Button btn = new Button(this);
-            btn.setText(this.rec.getString("1"));
-            btn.setTag(this.rec.getString("1"));
-            btn.setLayoutParams(new TableRow.LayoutParams(0,TableRow.LayoutParams.MATCH_PARENT,1f));
-            btn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Bundle bundle = new Bundle();
-                    bundle.putString("ID_PRODUIT", (String) view.getTag());
-                    Intent intent = new Intent(MainActivity.this, Pokemons.class);
-                    intent.putExtras(bundle);
-                    startActivity(intent);
-                }
-            });
-            tr.addView(btn);
-            tableLayout.addView(tr);
-        }
-        ScrollView sv = new ScrollView(this);
-        sv.addView(tableLayout);
-        setContentView(sv);
     }
 
 
