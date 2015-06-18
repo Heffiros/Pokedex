@@ -1,6 +1,5 @@
 package com.example.max.pokedex;
 
-import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.util.Log;
 import org.apache.http.HttpResponse;
@@ -13,7 +12,6 @@ import org.json.JSONException;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 
 public class jsonReader extends AsyncTask<String, Void, JSONArray> {
 
