@@ -6,10 +6,15 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -21,6 +26,9 @@ public class Detail extends ActionBarActivity {
 
 
     String Id;
+    JSONObject rec = null;
+    JSONArray json = null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +37,19 @@ public class Detail extends ActionBarActivity {
 
         Bundle objectbundle = this.getIntent().getExtras();
         if (objectbundle != null) {
-            Id = objectbundle.getString("Type");
+            Id = objectbundle.getString("Id");
+        }
+
+        jsonReader jsonReader = new jsonReader();
+        try {
+            this.json = jsonReader.execute("http://92.222.9.170/PokedexApi/GetDataWithPokemonId.php?id="+Id).get();
+            datasReceive();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }  catch (JSONException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
         }
     }
 
@@ -42,6 +62,22 @@ public class Detail extends ActionBarActivity {
     }
 
     public void datasReceive() throws JSONException {
+        JSONObject test = json.getJSONObject(0);
+        TextView desc = (TextView) findViewById(R.id.toto);
+        TextView stat1 = (TextView) findViewById(R.id.stat1);
+        TextView stat2 = (TextView) findViewById(R.id.stat2);
+        TextView stat3 = (TextView) findViewById(R.id.stat3);
+        TextView stat4 = (TextView) findViewById(R.id.stat4);
+        ImageView img = (ImageView) findViewById(R.id.gif);
+
+        desc.setText(test.getString("description"));
+        JSONArray stats = test.getJSONArray("base_stat");
+        stat1.setText(test.getString(stats.getString(1)));
+        stat2.setText(test.getString(stats.getString(2)));
+        stat3.setText(test.getString(stats.getString(3)));
+        stat4.setText(test.getString(stats.getString(4)));
+        imgReader imgg = new imgReader(img);
+        imgg.execute(test.getString("img_gif"));
     }
 
     @Override
