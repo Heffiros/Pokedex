@@ -33,6 +33,7 @@ public class imgReader extends AsyncTask<String, Void, Bitmap> {
     }
 
     protected void onPostExecute(Bitmap result) {
+        Log.i("test", "je suis passé la !");
         bmImage.setImageBitmap(result);
     }
 }

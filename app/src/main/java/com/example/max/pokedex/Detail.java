@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -68,16 +69,20 @@ public class Detail extends ActionBarActivity {
         TextView stat2 = (TextView) findViewById(R.id.stat2);
         TextView stat3 = (TextView) findViewById(R.id.stat3);
         TextView stat4 = (TextView) findViewById(R.id.stat4);
-        ImageView img = (ImageView) findViewById(R.id.gif);
+        TextView stat5 = (TextView) findViewById(R.id.stat5);
 
         desc.setText(test.getString("description"));
-        JSONArray stats = test.getJSONArray("base_stat");
-        stat1.setText(test.getString(stats.getString(1)));
-        stat2.setText(test.getString(stats.getString(2)));
-        stat3.setText(test.getString(stats.getString(3)));
-        stat4.setText(test.getString(stats.getString(4)));
-        imgReader imgg = new imgReader(img);
+        ImageView imgVw = (ImageView)findViewById(R.id.imageView);
+        imgReader imgg = new imgReader(imgVw);
         imgg.execute(test.getString("img_gif"));
+        imgVw.setScaleX(10);
+        imgVw.setScaleY(10);
+
+        stat1.setText("PV : " + test.getString("stat1"));
+        stat2.setText("ATT : " + test.getString("stat2"));
+        stat3.setText("DEF : " + test.getString("stat3"));
+        stat4.setText("ATT SPE : " + test.getString("stat4"));
+        stat5.setText("DEF SPE : " + test.getString("stat5"));
     }
 
     @Override

@@ -4,7 +4,8 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.example.max.pokedex.Detail">
+    tools:context="com.example.max.pokedex.Detail"
+    android:id="@+id/layout">
 
     <TextView android:text="@string/hello_world" android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -12,14 +13,6 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
         android:layout_marginBottom="108dp" />
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/gif"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="56dp" />
 
     <TextView
         android:text="@string/hello_world"
@@ -43,7 +36,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/stat3"
         android:layout_below="@+id/stat2"
-        android:layout_toEndOf="@+id/gif" />
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:text="@string/hello_world"
@@ -52,5 +45,21 @@
         android:id="@+id/stat4"
         android:layout_below="@+id/stat3"
         android:layout_alignParentStart="true" />
+
+    <TextView
+        android:text="@string/hello_world"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/stat5"
+        android:layout_below="@+id/stat4"
+        android:layout_alignParentStart="true" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/stat1"
+        android:layout_marginTop="99dp" />
 
 </RelativeLayout>
